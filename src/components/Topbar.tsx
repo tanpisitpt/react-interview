@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { IconButton } from '@material-ui/core'
+import { Breadcrumbs, IconButton, Link, Typography } from '@material-ui/core'
 import { AccountCircle, Help, List, LocalMall, Settings } from '@material-ui/icons'
 import { useState } from 'react'
 
@@ -11,31 +11,6 @@ const TopbarDiv = styled.div`
 
 const Logo = styled.div`
   width: 200px;
-`
-
-const Breadcumb = styled.ul`
-  display: flex;
-  margin: 0;
-  padding: 0 1rem;
-  list-style: none;
-`
-const BreadcumbItem = styled.li`
-  color: #aaa;
-
-  &:last-of-type {
-    &:after {
-      content: '';
-    }
-  }
-
-  &:after {
-    content: '/';
-    margin: 0 .5rem;
-  }
-`
-
-const BreadcumbLink = styled.a`
-  padding: 0 1rem;
 `
 
 const TopbarMenu = styled.div`
@@ -59,14 +34,20 @@ const Topbar = () => {
   return (
     <TopbarDiv>
       <Logo>Azure DevOps</Logo>
-      <Breadcumb>
-        <BreadcumbItem>
-          <BreadcumbLink href="#awtech-dev">awtech-dev</BreadcumbLink>
-        </BreadcumbItem>
-        <BreadcumbItem>
-          <BreadcumbLink href="#sandbox">sandbox</BreadcumbLink>
-        </BreadcumbItem>
-      </Breadcumb>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link color="inherit" href="#awtech-dev">
+          awtech-dev
+        </Link>
+        <Link color="inherit" href="#sandbox">
+          sandbox
+        </Link>
+        <Typography color="inherit">
+          Overview
+        </Typography>
+        <Typography color="textPrimary">
+          Summary
+        </Typography>
+      </Breadcrumbs>
       <TopbarMenu>
         <SearchInput type="text" placeholder="Search" value={searchvalue} onChange={(e) => { setSearchvalue(e.target.value) }} />
         <MenuList>
