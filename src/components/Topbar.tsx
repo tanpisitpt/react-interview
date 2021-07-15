@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Breadcrumbs, IconButton, Link, Typography } from '@material-ui/core'
+import { Breadcrumbs, IconButton, Link, Typography, Menu, MenuItem } from '@material-ui/core'
 import { AccountCircle, Help, List, LocalMall, Settings } from '@material-ui/icons'
 import { useState } from 'react'
 
@@ -29,7 +29,12 @@ const MenuList = styled.div`
 `
 
 const Topbar = () => {
+  const [anchorEl, setAnchorEl] = useState<any>(null)
   const [searchvalue, setSearchvalue] = useState('')
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
 
   return (
     <TopbarDiv>
@@ -63,9 +68,20 @@ const Topbar = () => {
           <IconButton>
             <Settings />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={(e) => { setAnchorEl(e.target) }}>
             <AccountCircle />
           </IconButton>
+          <Menu
+            id="account-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Menu>
         </MenuList>
       </TopbarMenu>
     </TopbarDiv>
