@@ -7,6 +7,7 @@ const TopbarDiv = styled.div`
   display: flex;
   padding: 1rem 2rem;
   align-items: center;
+  border-bottom: 1px solid #bbb;
 `
 
 const Logo = styled.div`
