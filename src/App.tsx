@@ -1,7 +1,9 @@
 import styled from '@emotion/styled/macro';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Sidebar from './components/Sidebar';
-import Topbar from './components/Topbar';
+import Index from './page/Index';
+import NotFound from './page/NotFound';
+import Summary from './page/Summary';
 
 const AppDiv = styled.div`
   width: 100vw;
@@ -10,20 +12,17 @@ const AppDiv = styled.div`
   display: flex;
   flex-flow: column nowrap;
 `
-const Main = styled.main`
-  flex: 1 0 auto;
-  display: flex;
-  flex-flow: row nowrap;
-`
 
 function App() {
   return (
     <AppDiv>
-      <Topbar />
-      <Main>
-        <Sidebar />
-        <div className="content"></div>
-      </Main>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/summary" render={() => <Summary />} />
+          <Route path="/" render={() => <Index />} exact />
+          <Route path="/" render={() => <NotFound />} />
+        </Switch>
+      </BrowserRouter>
     </AppDiv>
   );
 }

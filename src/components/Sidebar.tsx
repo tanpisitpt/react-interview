@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import { IconButton, Typography } from '@material-ui/core';
 import { Add, AddBox, AllInbox, Dashboard, DeveloperBoard, Home, Note } from '@material-ui/icons';
 import { ReactElement, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Dropdown, DropdownItem } from './Dropdown';
 
 interface MenuItemInterface {
@@ -57,7 +58,7 @@ const MenuItemStyled = styled.li`
   }
 `
 
-const MenuLink = styled.a`
+const MenuLink = styled(Link)`
   display: flex;
   flex-flow: row nowrap;
   padding: 0.5rem 1rem;
@@ -85,14 +86,14 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
 
   return dropdown ? (
     <MenuItemStyled className={`${showDropdown ? 'active' : ''}`}>
-      <MenuLink href={href} onClick={handleMenuLinkClick}>
+      <MenuLink to={href} onClick={handleMenuLinkClick}>
         {icon}
         <Typography style={{marginLeft: '0.5rem' }}>{name}</Typography>
       </MenuLink>
       <Dropdown show={showDropdown}>
         {dropdown && dropdown.map((dropdownItem, i) => (
           <DropdownItem key={`dropdown-item-${href}-${i}`}>
-            <MenuLink href={dropdownItem.href}>
+            <MenuLink to={dropdownItem.href}>
               {dropdownItem.icon}
               <Typography style={{marginLeft: '0.5rem' }}>{dropdownItem.name}</Typography>
             </MenuLink>
@@ -102,7 +103,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     </MenuItemStyled>
   ) : (
     <MenuItemStyled>
-      <MenuLink href={href}>
+      <MenuLink to={href}>
         {icon}
         <Typography style={{marginLeft: '0.5rem' }}>{name}</Typography>
       </MenuLink>
@@ -120,17 +121,17 @@ const Sidebar = () => {
         {
           icon: <AllInbox />,
           name: 'Summary',
-          href: '#summary',
+          href: '/summary',
         },
         {
           icon: <Dashboard />,
           name: 'Dashboard',
-          href: '#dashboard',
+          href: '/dashboard',
         },
         {
           icon: <Note />,
           name: 'Wiki',
-          href: '#dashboard',
+          href: '/dashboard',
         },
       ]
     },
@@ -204,7 +205,7 @@ const Sidebar = () => {
     {
       icon: <DeveloperBoard />,
       name: 'Artifacts',
-      href: '#artifactspipelines',
+      href: '/artifacts',
     },
   ]
 

@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
-import { Breadcrumbs, IconButton, Link, Typography, Menu, MenuItem } from '@material-ui/core'
+import { Breadcrumbs, IconButton, Typography, Menu, MenuItem } from '@material-ui/core'
 import { AccountCircle, Help, List, LocalMall, Settings } from '@material-ui/icons'
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const TopbarDiv = styled.div`
   display: flex;
@@ -14,15 +15,24 @@ const Logo = styled.div`
   width: 200px;
 `
 
+const TopbarBreadcrumbs = styled(Breadcrumbs)`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
+`
+
 const TopbarMenu = styled.div`
   display: flex;
   margin-left: auto;
+  align-items: center;
 `
 
 const SearchInput = styled.input`
   border-radius: 0;
   border: 1px solid #444;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.5rem;
+  height: 1.25rem;
 `
 
 const MenuList = styled.div`
@@ -39,12 +49,14 @@ const Topbar = () => {
 
   return (
     <TopbarDiv>
-      <Logo>Azure DevOps</Logo>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link color="inherit" href="#awtech-dev">
+      <Link to="/">
+        <Logo>Azure DevOps</Logo>
+      </Link>
+      <TopbarBreadcrumbs aria-label="breadcrumb">
+        <Link to="/">
           awtech-dev
         </Link>
-        <Link color="inherit" href="#sandbox">
+        <Link to="/sandbox">
           sandbox
         </Link>
         <Typography color="inherit">
@@ -53,7 +65,7 @@ const Topbar = () => {
         <Typography color="textPrimary">
           Summary
         </Typography>
-      </Breadcrumbs>
+      </TopbarBreadcrumbs>
       <TopbarMenu>
         <SearchInput type="text" placeholder="Search" value={searchvalue} onChange={(e) => { setSearchvalue(e.target.value) }} />
         <MenuList>
