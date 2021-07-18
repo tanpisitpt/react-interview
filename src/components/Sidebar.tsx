@@ -1,8 +1,8 @@
 import styled from '@emotion/styled/macro';
 import { IconButton, Typography } from '@material-ui/core';
 import { Add, AddBox, AllInbox, Dashboard, DeveloperBoard, Home, Note } from '@material-ui/icons';
-import { ReactElement, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { ReactElement, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Dropdown, DropdownItem } from './Dropdown';
 
 interface MenuItemInterface {
@@ -83,6 +83,19 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     e.preventDefault();
     setShowDropdown(!showDropdown);
   }
+  
+  const location = useLocation();
+  useEffect(() => {
+    const matchLink = dropdown?.filter((item) => {
+      return item.href === location.pathname
+    })
+    if (matchLink?.length) {
+      setShowDropdown(true)
+    }
+    return () => {
+      setShowDropdown(false);
+    }
+  }, [dropdown, location])
 
   return dropdown ? (
     <MenuItemStyled className={`${showDropdown ? 'active' : ''}`}>
@@ -92,7 +105,10 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
       </MenuLink>
       <Dropdown show={showDropdown}>
         {dropdown && dropdown.map((dropdownItem, i) => (
-          <DropdownItem key={`dropdown-item-${href}-${i}`}>
+          <DropdownItem
+            key={`dropdown-item-${href}-${i}`}
+            className={`${dropdownItem.href === location.pathname ? 'active' : ''}`}
+          >
             <MenuLink to={dropdownItem.href}>
               {dropdownItem.icon}
               <Typography style={{marginLeft: '0.5rem' }}>{dropdownItem.name}</Typography>
@@ -138,44 +154,44 @@ const Sidebar = () => {
     {
       icon: <DeveloperBoard />,
       name: 'Boards',
-      href: '#boards',
+      href: '#',
       dropdown: [
         {
           icon: <Home />,
           name: 'Boards 1',
-          href: '#boards-1',
+          href: '/boards-1',
         },
         {
           icon: <Home />,
           name: 'Boards 2',
-          href: '#boards-2',
+          href: '/boards-2',
         },
         {
           icon: <Home />,
           name: 'Boards 3',
-          href: '#boards-3',
+          href: '/boards-3',
         },
       ]
     },
     {
       icon: <DeveloperBoard />,
       name: 'Repos',
-      href: '#repos',
+      href: '#',
       dropdown: [
         {
           icon: <Home />,
           name: 'Repos 1',
-          href: '#repos-1',
+          href: '/repos-1',
         },
         {
           icon: <Home />,
           name: 'Repos 2',
-          href: '#repos-2',
+          href: '/repos-2',
         },
         {
           icon: <Home />,
           name: 'Repos 3',
-          href: '#repos-3',
+          href: '/repos-3',
         },
       ]
     },
@@ -187,17 +203,17 @@ const Sidebar = () => {
         {
           icon: <Home />,
           name: 'Pipelines 1',
-          href: '#pipelines-1',
+          href: '/pipelines-1',
         },
         {
           icon: <Home />,
           name: 'Pipelines 2',
-          href: '#pipelines-2',
+          href: '/pipelines-2',
         },
         {
           icon: <Home />,
           name: 'Pipelines 3',
-          href: '#pipelines-3',
+          href: '/pipelines-3',
         },
       ]
     },
