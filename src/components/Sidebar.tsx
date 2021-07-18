@@ -142,7 +142,7 @@ const Sidebar = () => {
         {
           icon: <Dashboard />,
           name: 'Dashboard',
-          href: '/dashboard',
+          href: '/',
         },
         {
           icon: <Note />,
