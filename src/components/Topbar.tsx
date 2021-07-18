@@ -6,13 +6,17 @@ import { Link } from 'react-router-dom';
 
 const TopbarDiv = styled.div`
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   align-items: center;
   border-bottom: 1px solid #bbb;
 `
 
-const Logo = styled.div`
+const LogoLink = styled(Link)`
   width: 200px;
+`
+
+const Logo = styled.div`
+  padding: 0 2rem;
 `
 
 const TopbarBreadcrumbs = styled(Breadcrumbs)`
@@ -49,9 +53,9 @@ const Topbar = () => {
 
   return (
     <TopbarDiv>
-      <Link to="/">
+      <LogoLink to="/">
         <Logo>Azure DevOps</Logo>
-      </Link>
+      </LogoLink>
       <TopbarBreadcrumbs aria-label="breadcrumb">
         <Link to="/">
           awtech-dev
