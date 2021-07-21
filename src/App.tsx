@@ -6,9 +6,6 @@ import NotFound from './page/NotFound';
 import Summary from './page/Summary';
 
 const AppDiv = styled.div`
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
 `
