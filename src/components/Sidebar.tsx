@@ -18,12 +18,32 @@ interface MenuItemInterface {
 
 const SidebarDiv = styled.aside`
   height: 100%;
-  width: 200px;
-  display: flex;
+  display: none;
   flex-flow: column nowrap;
   background: #eee;
   width: 200px;
   border-right: 1px solid #bbb;
+  position: fixed;
+  margin-top: 81px;
+  height: calc(100vh - 81px);
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+
+  .mobile & {
+    display: flex;
+    margin-top: 0;
+    position: static;
+  }
+`
+
+const AddSandBoxWrapper = styled.div`
+  padding: 0.5rem 1rem;
+
+  .mobile & {
+    background: #fff;
+  }
 `
 
 const AddSandbox = styled.div`
@@ -31,7 +51,6 @@ const AddSandbox = styled.div`
   align-items: center;
   padding: 0.5rem 0;
   border-bottom: 1px solid #ccc;
-  margin: 0.5rem 1rem;
 `
 
 const SidebarMenu = styled.ul`
@@ -127,7 +146,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   )
 }
 
-const Sidebar = () => {
+const Sidebar: React.FC = (props) => {
   const menuItems: MenuItemInterface[] = [
     {
       icon: <Home />,
@@ -227,11 +246,13 @@ const Sidebar = () => {
 
   return (
     <SidebarDiv>
-      <AddSandbox>
-        <AddBox />
-        <Typography style={{marginLeft: '0.5rem', fontWeight: 'bold'}}>sandbox</Typography>
-        <IconButton style={{ padding: '0', marginLeft: 'auto' }}><Add /></IconButton>
-      </AddSandbox>
+      <AddSandBoxWrapper>
+        <AddSandbox>
+          <AddBox />
+          <Typography style={{marginLeft: '0.5rem', fontWeight: 'bold'}}>sandbox</Typography>
+          <IconButton style={{ padding: '0', marginLeft: 'auto' }}><Add /></IconButton>
+        </AddSandbox>
+      </AddSandBoxWrapper>
       <SidebarMenu>
         {menuItems.map((menuItem, i) => <MenuItem {...menuItem} key={`menu-item-${i}`} />)}
       </SidebarMenu>

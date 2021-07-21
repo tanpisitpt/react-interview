@@ -6,9 +6,12 @@ import Sidebar from "../components/Sidebar"
 import Topbar from "../components/Topbar"
 
 const Main = styled.main`
-  flex: 1 0 auto;
-  display: flex;
-  flex-flow: row nowrap;
+  display: block;
+
+  @media (min-width: 768px) {
+    margin-left: 200px;
+    margin-top: 81px;
+  }
 `
 
 const Content = styled.div`
@@ -71,28 +74,41 @@ const ContentContainer = styled(Container)`
 
 const GridBlock = styled.div`
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  width: calc(100vw - 200px - 30px);
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 3fr 2fr;
+    gap: 1rem;
+  }
+`
+
+const DesktopText = styled.span`
+  display: none;
+  margin-left: 0.5rem;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 `
 
 const Index = () => {
   return (
     <>
       <Topbar />
+      <Sidebar />
       <Main>
-        <Sidebar />
         <Content>
           <ContentHead style={{ flex: '0 1 auto' }}>
             <AddBox />
             <Box fontWeight="Bold" style={{marginLeft: '0.5rem'}}>sandbox</Box>
             <PrivateTag>
               <Lock fontSize="small" style={{fontSize: '0.875rem'}} />
-              <Box style={{ marginLeft: '0.5rem' }}>Private</Box>
+              <DesktopText>Private</DesktopText>
             </PrivateTag>
             <InviteButton>
               <PersonAdd style={{fontSize: '0.875rem'}} />
-              <Box style={{ marginLeft: '0.5rem' }}>Invite</Box>
+              <DesktopText>Invite</DesktopText>
             </InviteButton>
             <Favorite />
           </ContentHead>
